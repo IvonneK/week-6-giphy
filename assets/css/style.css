@@ -7,6 +7,15 @@ img {
     height: auto;
 }
 
+#sportsForm {
+    float: right;
+    text-align: left;
+    font-family: sans-serif;
+    font-size: 18px;
+    width: 250px; 
+    border: 2px solid #ccc;
+}
+
 p {
     padding: 5px;
     margin: 5px;

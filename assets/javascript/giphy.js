@@ -1,4 +1,4 @@
-
+		
 		var sportsFigure = ["Odell Beckham", "David Beckham", "Eli Manning", "Eli Apple", "Carmelo Anthony", "Porzingis", "Tiger Woods"];
 		for (var i = 0; i < sportsFigure.length; i++) {
 			console.log('inside loop= var i=' + i);
