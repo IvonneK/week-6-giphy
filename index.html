@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<html lang="en-us">
+
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Giphies</title>
+
+	<!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"> -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+<!-- 	<form id=form>
+		<input 
+	data.images.fixed_width_still.url
+	</form>
+ -->
+	<div id='myButtons'></div>
+	<div class="container">
+		<div id='viewImage'></div>
+	</div>
+
+  	<script src='https://code.jquery.com/jquery.js'></script>
+	<script type="text/javascript">
+
+		var sportsFigure = ["Odell Beckham", "David Beckham", "Eli Manning", "Eli Apple", "Carmelo Anthony", "Porzingis", "Tiger Woods"];
+		for (var i = 0; i < sportsFigure.length; i++) {
+			console.log('inside loop= var i=' + i);
+
+			$("#myButtons").append("<button id=" + sportsFigure[i] + " class='btn-default btn-med'>" + sportsFigure[i] + '</button>');
+			console.log('append button');
+		
+		};
+
+		$(document).ready(function(){
+		    $("button").click(function(){
+		        var anythis = $(this);
+		        console.log(anythis);
+		        var buttonSearchVal = $(this).context.textContent;
+		        console.log(buttonSearchVal)
+		        runQuery (buttonSearchVal);
+		        return false;
+		       // event.preventDefault();
+		    });
+		});
+
+		// query request
+		function runQuery(searchVal) {
+			var apiKey = 'api_key=dc6zaTOxFJmzC';
+			var searchUpper = searchVal.toUpperCase();
+			var searchRequest = '&q=' + searchVal;
+			var limitRecords = '&limit=10'
+			var queryURL = 'http://api.giphy.com/v1/gifs/search?' + apiKey + searchRequest + limitRecords;
+
+			$.ajax({
+			url: queryURL,
+			method: 'GET'})
+			.done(function(result) {
+				console.log(result);
+				var arrayDocs = result.data.length;
+				for (var j = 0; j <  arrayDocs; j++) {
+					var a = result.data[j].images.downsized.url;
+					console.log('var a=' + a);
+					var b = result.data[j].images.downsized_still.url;
+					console.log('var b=' + b);
+					var image1 = $('<img>').attr('src', a);
+					image1.addClass('img-thumbnail');
+					// Had tutor look at my code up to this point he said  setup attr for data-still, data-animated, data-state (switch src depending on state can't find proper explaination online got to throw in towel will come back to it too much wasted time)
+					var gifRating = searchUpper + '  Rating: ' + result.data[j].rating;
+					$('#viewImage').append(image1); 
+					$('#viewImage').append('<p>' + gifRating + '</p>');
+					$(image1).click(function(){
+				        var whatisthis = $(this);
+				        console.log(whatisthis);
+				        var myimageval = $(this).context.src;
+				        var image2 = b;
+				        // runQuery (buttonSearchVal);
+				        // return false;
+				       // event.preventDefault();
+
+						$(function(){
+						  $(".img-thumbnail").on('click', function() {
+						  	console.log('here inside anon function');
+						    if ($(this).attr("class") == "img-thumbnail") {
+						    	this.src = this.src.replace(b,a);
+
+						    	console.log('did a replace b for a');
+						    	console.log(this.src);
+						    } else {
+						    	this.src = this.src.replace(a,b);
+						    }
+						  });
+						});
+
+
+				    });
+
+
+				};
+
+			});
+		};
+
+
+	</script>
+</body>
+</html>
+
+<!-- 
+1. **Hit the GIPHY API**.
+	* Fool around with the GIPHY API. [You can read more here](cd).
+
+	* Be sure to read about these GIPHY parameters (hint, hint): 
+		* `q`
+		* `limit`
+		* `rating`
+
+	* Like many APIs, GIPHY requires developers to use a key to access their API data. Their public API Key is [provided here](https://github.com/Giphy/GiphyAPI#overview). 
+
+2. **[Watch the demo video](homework_demo.mov)**.
+
+	* You should have a high-level understanding of how this assignment works before attempting to code it.
+
+### Instructions
+
+1. Before you can make any part of our site work, you need to create an array of strings, each one related to a topic that interests you. Save it to a variable called `topics`. 
+	* We chose animals for our theme, but you can make a list to your own liking.
+
+2. Your app should take the topics in this array and create buttons in your HTML.
+	* Try using a loop that appends a button for each string in the array.
+
+3. When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page. 
+
+4. When the user clicks one of the still GIPHY images, the gif should animate. If the user clicks the gif again, it should stop playing.
+
+5. Under every gif, display its rating (PG, G, so on). 
+	* This data is provided by the GIPHY API.
+	* Only once you get images displaying with button presses should you move on to the next step.
+
+6. Add a form to your page takes the value from a user input box and adds it into your `topics` array. Then make a function call that takes each topic in the array remakes the buttons on the page.
+
+7. **Rejoice**! You just made something really cool. -->

@@ -1,0 +1,19 @@
+img {
+	padding: 5px;
+    margin: 5px;
+    border: 2px solid #ccc;
+    float: left;
+    width: 250px;
+    height: auto;
+}
+
+p {
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid #ccc;
+    text-align: right;
+    background-color: #003f7f;
+    color: #ffffff;
+    width: 250px;
+    height: auto;
+ }
