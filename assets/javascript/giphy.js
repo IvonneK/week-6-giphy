@@ -7,8 +7,8 @@
 			console.log('append button');
 		
 		};
-
-		    $("button").click(function(){
+		$('document').ready(function(){
+		    $('button').click(function(){
 		        var anythis = $(this);
 		        console.log(anythis);
 		        var buttonSearchVal = $(this).context.textContent;
@@ -17,6 +17,7 @@
 		        return false;
 		       // event.preventDefault();
 		    });
+		 });
 
 		// query request
 		function runQuery(searchVal) {
