@@ -25,7 +25,7 @@
 			var searchUpper = searchVal.toUpperCase();
 			var searchRequest = '&q=' + searchVal;
 			var limitRecords = '&limit=10'
-			var queryURL = 'http://api.giphy.com/v1/gifs/search?' + apiKey + searchRequest + limitRecords;
+			var queryURL = 'https://api.giphy.com/v1/gifs/search?' + apiKey + searchRequest + limitRecords;
 
 			$.ajax({
 			url: queryURL,
