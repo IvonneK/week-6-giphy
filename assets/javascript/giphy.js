@@ -8,7 +8,6 @@
 		
 		};
 
-		$(document).ready(function(){
 		    $("button").click(function(){
 		        var anythis = $(this);
 		        console.log(anythis);
@@ -18,7 +17,6 @@
 		        return false;
 		       // event.preventDefault();
 		    });
-		});
 
 		// query request
 		function runQuery(searchVal) {
